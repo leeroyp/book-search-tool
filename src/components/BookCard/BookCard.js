@@ -1,5 +1,5 @@
 import "./bookCard.scss";
-import openlibrary from "../../Images/openLibrary.jpeg";
+import openlibrary from "../Images/openLibrary.jpeg";
 
 const BookCard = ({ image, title, author, PubDate }) => {
   return (
@@ -17,8 +17,8 @@ const BookCard = ({ image, title, author, PubDate }) => {
         />
         <div className="Book-card_contents">
           <h2 className="Book-card__title">{title}</h2>
-          <p>{author}</p>
-          <p>{PubDate}</p>
+          <p>By: {author}</p>
+          <p>Year Published: {PubDate}</p>
         </div>
       </div>
       <hr />

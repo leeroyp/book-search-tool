@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import BookCard from "../BookCard/BookCard";
 import SearchBar from "../SearchBar/SearchBar";
-import "./fetchBooks.scss"
+import "./fetchBooks.scss";
 
 const BookSearch = () => {
   const [inputValue, setInputValue] = useState("");
@@ -26,6 +26,7 @@ const BookSearch = () => {
             };
             setBooks((books) => [...books, bookObj]);
           });
+          setSortType("title");
         }),
     {
       refetchAllOnWindowFocus: false,
@@ -54,8 +55,15 @@ const BookSearch = () => {
 
   console.log("new", newdata);
 
+  let errorMessage;
   if (status === "loading") return <div>loading...</div>;
-  if (status === "error") return <div>There are no books matching your search please be more specific</div>;
+  if (status === "error") {
+    errorMessage = (
+      <p className="errorMessage">
+        There are no books matching your search please be more specific
+      </p>
+    );
+  }
 
   const searchFunc = (e) => {
     e.preventDefault();
@@ -74,17 +82,24 @@ const BookSearch = () => {
           submit={searchFunc}
           className="Search-books-searchbar"
         />
-        <div className="Search-books-sort">
+        <div className="Search-books-sort" style={{display: "none"}}>
           <div className="Search-books-sort-select">
             <label>Sort books by:</label>
-            <select onChange={(e) => setSortType(e.target.value)}>
+            <select onChange={(e) => setSortType(e.target.value)} className="selectOption">
               <option value="">Sort books by:</option>
               <option value="title">Title</option>
               <option value="date">Date</option>
             </select>
           </div>
+        
+
+         
+
+
         </div>
+        <div className="errorContainer">{errorMessage}</div>
       </div>
+
       <div className="Search-books-display">
         {newdata.map((item, index) => (
           <div key={index}>
@@ -96,9 +111,9 @@ const BookSearch = () => {
             />
           </div>
         ))}
-       </div>
-       </div>
-  )
+      </div>
+    </div>
+  );
 };
 
 export default BookSearch;
