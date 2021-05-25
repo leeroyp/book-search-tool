@@ -13,7 +13,7 @@ const BookSearch = () => {
   const { status, data, refetch } = useQuery(
     [inputValue],
     () =>
-      fetch(`http://openlibrary.org/search.json?title=${inputValue}`)
+      fetch(`https://openlibrary.org/search.json?title=${inputValue}`)
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
@@ -34,9 +34,6 @@ const BookSearch = () => {
     }
   );
 
-  console.log(books);
-  console.log("data", data);
-
   useEffect(() => {
     const sortArray = (type) => {
       const types = {
@@ -49,11 +46,8 @@ const BookSearch = () => {
       );
       setNewData(sorted);
     };
-
     sortArray(sortType);
   }, [sortType]);
-
-  console.log("new", newdata);
 
   let errorMessage;
   if (status === "loading") return <div>loading...</div>;
@@ -67,7 +61,6 @@ const BookSearch = () => {
 
   const searchFunc = (e) => {
     e.preventDefault();
-    // setNewData([])
     setBooks([]);
     setSortType("");
     refetch();
@@ -82,20 +75,18 @@ const BookSearch = () => {
           submit={searchFunc}
           className="Search-books-searchbar"
         />
-        <div className="Search-books-sort" style={{display: "none"}}>
+        <div className="Search-books-sort" style={{ display: "none" }}>
           <div className="Search-books-sort-select">
             <label>Sort books by:</label>
-            <select onChange={(e) => setSortType(e.target.value)} className="selectOption">
+            <select
+              onChange={(e) => setSortType(e.target.value)}
+              className="selectOption"
+            >
               <option value="">Sort books by:</option>
               <option value="title">Title</option>
               <option value="date">Date</option>
             </select>
           </div>
-        
-
-         
-
-
         </div>
         <div className="errorContainer">{errorMessage}</div>
       </div>
