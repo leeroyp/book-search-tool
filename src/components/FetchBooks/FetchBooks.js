@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "react-query";
-
+import BookCard from "../BookCard/BookCard";
+import SearchBar from "../SearchBar/SearchBar";
 import "./fetchBooks.scss"
 
 const BookSearch = () => {
@@ -73,6 +74,28 @@ const BookSearch = () => {
           submit={searchFunc}
           className="Search-books-searchbar"
         />
+        <div className="Search-books-sort">
+          <div className="Search-books-sort-select">
+            <label>Sort books by:</label>
+            <select onChange={(e) => setSortType(e.target.value)}>
+              <option value="">Sort books by:</option>
+              <option value="title">Title</option>
+              <option value="date">Date</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div className="Search-books-display">
+        {newdata.map((item, index) => (
+          <div key={index}>
+            <BookCard
+              image={item.coverId}
+              title={item.title}
+              author={item.author}
+              PubDate={item.date}
+            />
+          </div>
+        ))}
        </div>
        </div>
   )
