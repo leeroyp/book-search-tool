@@ -35,8 +35,23 @@ const BookSearch = () => {
   console.log(books);
   console.log("data", data);
 
- 
+  useEffect(() => {
+    const sortArray = (type) => {
+      const types = {
+        title: "title",
+        date: "date",
+      };
+      const sortProperty = types[type];
+      const sorted = [...books].sort(
+        (a, b) => b[sortProperty] - a[sortProperty]
+      );
+      setNewData(sorted);
+    };
 
+    sortArray(sortType);
+  }, [sortType]);
+
+  console.log("new", newdata);
 
   if (status === "loading") return <div>loading...</div>;
   if (status === "error") return <div>There are no books matching your search please be more specific</div>;
