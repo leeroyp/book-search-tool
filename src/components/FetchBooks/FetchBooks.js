@@ -9,6 +9,7 @@ const BookSearch = () => {
   const [books, setBooks] = useState([]);
   const [sortType, setSortType] = useState("");
   const [newdata, setNewData] = useState([]);
+  const [display, setDisplay] = useState("none")
 
   const { status, data, refetch } = useQuery(
     [inputValue],
@@ -27,6 +28,7 @@ const BookSearch = () => {
             setBooks((books) => [...books, bookObj]);
           });
           setSortType("title");
+          setDisplay("")
         }),
     {
       refetchAllOnWindowFocus: false,
@@ -75,14 +77,13 @@ const BookSearch = () => {
           submit={searchFunc}
           className="Search-books-searchbar"
         />
-        <div className="Search-books-sort" style={{ display: "none" }}>
+        <div className="Search-books-sort" style={{ display: display }}>
           <div className="Search-books-sort-select">
             <label>Sort books by:</label>
             <select
               onChange={(e) => setSortType(e.target.value)}
               className="selectOption"
             >
-              <option value="">Sort books by:</option>
               <option value="title">Title</option>
               <option value="date">Date</option>
             </select>
