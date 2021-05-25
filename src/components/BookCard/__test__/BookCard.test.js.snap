@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="Book-card"
+    data-testid="book-cards"
+  >
+    <img
+      alt="Harry Potter and the Philosopher's Stone book cover"
+      class="Book-card_cover"
+      data-testid="image"
+      src="http://covers.openlibrary.org/b/id/10521270-M.jpg"
+    />
+    <div
+      class="Book-card_contents"
+    >
+      <h2
+        class="Book-card__title"
+      >
+        Harry Potter and the Philosopher's Stone
+      </h2>
+      <p>
+        J.K Rowling
+      </p>
+      <p>
+        1997
+      </p>
+    </div>
+  </div>
+  <hr />
+</DocumentFragment>
+`;
