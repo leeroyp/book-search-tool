@@ -1,23 +1,24 @@
 @mixin respond ($breakpoint) {
 
-    // $breakpoint is simply a variable that can have several values
-
-    @if $breakpoint==tablet {
-
-        // here `laptop` is the value of $breakpoint
-        // when call laptop, we mean the following piece of code        
-
-    @media only screen and (max-width: 600px) {
-      @content;
+  @if $breakpoint==desktop {
+      @media only screen and (max-width: 1048px) {
+        @content;
+      }
     }
-  }
 
-  @if $breakpoint==mobile {
-    @media only screen and (max-width: 480px) {
-      @content;
-    }
+  @if $breakpoint==tablet {
+  @media only screen and (max-width: 600px) {
+    @content;
   }
 }
+
+@if $breakpoint==mobile {
+  @media only screen and (max-width: 480px) {
+    @content;
+  }
+}
+}
+
 
 
 .container{
@@ -26,16 +27,36 @@
 }
 
 .Book-card{
-    // width: 250px;
+    width: 50vw;
     height: 250px;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
 
+    @include respond(tablet) {
+      width: 75vw;
+      height: auto;
+   }
+
+   @include respond(mobile) {
+    width: 75vw;
+    height: auto;
+    }
+
     &_cover{
         width: 185px;
         height: 250px; 
         margin-right:5vw;
+
+        @include respond(tablet) {
+          width: 125px;
+          height: 175px;
+       }
+    
+       @include respond(mobile) {
+        width: 125px;
+        height: 175px;
+        }
     }
 
     &__title{
@@ -48,6 +69,16 @@
         font-weight: normal; 
         font-size: 18px;
         line-height: 24px;  
+        @include respond(tablet) {
+          font-size: 14px;
+          line-height: 17px; 
+       }
+    
+       @include respond(mobile) {
+        font-size: 14px;
+        line-height: 17px; 
+        }
+
     }
 .contents{
 display: flex;
