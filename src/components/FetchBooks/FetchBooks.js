@@ -16,6 +16,15 @@ const BookSearch = () => {
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
+          data.docs.map((item) => {
+            let bookObj = {
+              title: item.title,
+              author: item.author_name,
+              coverId: item.cover_i,
+              date: item.first_publish_year,
+            };
+            setBooks((books) => [...books, bookObj]);
+          });
         }),
     {
       refetchAllOnWindowFocus: false,
