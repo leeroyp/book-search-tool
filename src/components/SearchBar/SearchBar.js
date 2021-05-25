@@ -12,7 +12,7 @@ const Searchbar = ({value,onchange, submit}) => {
       aria-label="Enter your book search"
       type="search"
       value={value}
-      placeholder={"search Book by Title"}
+      placeholder={"Search Book by Title"}
       onChange={onchange}
       required
     />
