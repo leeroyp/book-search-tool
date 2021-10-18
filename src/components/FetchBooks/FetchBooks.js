@@ -1,15 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useQuery } from "react-query";
 import BookCard from "../BookCard/BookCard";
 import SearchBar from "../SearchBar/SearchBar";
+import Pagination from "../Pagination"
 import "./fetchBooks.scss";
 
 const BookSearch = () => {
+
+  let PageSize = 10;
+
   const [inputValue, setInputValue] = useState("");
   const [books, setBooks] = useState([]);
   const [sortType, setSortType] = useState("");
   const [newdata, setNewData] = useState([]);
   const [display, setDisplay] = useState("none")
+  const [currentPage, setCurrentPage] = useState(1);
+
 
   const { status, data, refetch } = useQuery(
     [inputValue],
@@ -35,6 +41,14 @@ const BookSearch = () => {
       enabled: false,
     }
   );
+ 
+  console.log(books)
+
+  const currentData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    return newdata.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage]);
 
   useEffect(() => {
     const sortArray = (type) => {
@@ -93,7 +107,7 @@ const BookSearch = () => {
       </div>
 
       <div className="Search-books-display">
-        {newdata.map((item, index) => (
+        {currentData.map((item, index) => (
           <div key={index}>
             <BookCard
               image={item.coverId}
@@ -104,6 +118,13 @@ const BookSearch = () => {
           </div>
         ))}
       </div>
+      <Pagination
+        className="pagination-bar"
+        currentPage={currentPage}
+        totalCount={newdata.length}
+        pageSize={PageSize}
+        onPageChange={page => setCurrentPage(page)}
+      />
     </div>
   );
 };
