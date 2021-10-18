@@ -44,12 +44,6 @@ const BookSearch = () => {
  
   console.log(books)
 
-  const currentData = useMemo(() => {
-    const firstPageIndex = (currentPage - 1) * PageSize;
-    const lastPageIndex = firstPageIndex + PageSize;
-    return newdata.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage]);
-
   useEffect(() => {
     const sortArray = (type) => {
       const types = {
@@ -63,7 +57,16 @@ const BookSearch = () => {
       setNewData(sorted);
     };
     sortArray(sortType);
+
+    
   }, [sortType]);
+
+  const currentData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    return newdata.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage]);
+
 
   let errorMessage;
   if (status === "loading") return <div>loading...</div>;
@@ -107,7 +110,7 @@ const BookSearch = () => {
       </div>
 
       <div className="Search-books-display">
-        {currentData.map((item, index) => (
+        {newdata.map((item, index) => (
           <div key={index}>
             <BookCard
               image={item.coverId}
