@@ -1,0 +1,59 @@
+// @mixin respond ($breakpoint) {
+
+//     // $breakpoint is simply a variable that can have several values
+
+//     @if $breakpoint==tablet {
+
+//         // here `laptop` is the value of $breakpoint
+//         // when call laptop, we mean the following piece of code        
+
+//     @media only screen and (max-width: 600px) {
+//       @content;
+//     }
+//   }
+
+//   @if $breakpoint==mobile {
+//     @media only screen and (max-width: 480px) {
+//       @content;
+//     }
+//   }
+// }
+
+
+.container{
+    width: 50vw;
+    height: auto;
+}
+
+.Book-card{
+    // width: 250px;
+    height: 250px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+
+    &_cover{
+        width: 185px;
+        height: 250px; 
+        margin-right:5vw;
+    }
+
+    &__title{
+        font-family: sans-serif;
+        font-weight: 800;
+    }
+
+    &__text{
+        font-family: sans-serif;
+        font-weight: normal; 
+        font-size: 18px;
+        line-height: 24px;  
+    }
+.contents{
+display: flex;
+flex-direction: column;
+text-align: left;
+
+}
+}
+
